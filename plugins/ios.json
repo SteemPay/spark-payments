@@ -1,0 +1,19 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.kodaxx.steempaypos"
+    },
+    "phonegap-nfc": {
+      "NFC_USAGE_DESCRIPTION": "Read NFC Tags",
+      "PACKAGE_NAME": "com.kodaxx.steempaypos"
+    }
+  },
+  "dependent_plugins": {}
+}

@@ -1,0 +1,161 @@
+/* MAIN CSS */
+
+@font-face {
+    font-family: Netto;
+    src: url('./fonts/netto_ot.ttf');
+}
+
+* {
+    font-family: Netto, 'PT Sans', sans-serif;
+    outline: none;
+}
+
+body {
+	background: #ededed;
+	padding: 0;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('pageLoader.gif') 50% 50% no-repeat rgb(249, 249, 249);
+    background-size: 20vw;
+    text-align: center;
+}
+
+.status {
+    position: relative;
+    top: 58vh;
+    color: #9EACBA;
+}
+
+.hidden {
+	left: -9999px;
+	position: absolute;
+}
+
+.headerImage {
+	margin: 20px auto;
+}
+.mainImage {
+	margin: 20px auto;
+    height: 50vh;
+    width: auto;
+}
+.mainButton {
+	box-shadow: #1c75bc 0 0 1px 1px;
+	background: #ededed;
+	color: #7e7e7e;
+	font-size: 40px;
+	border: none;
+	/*background: linear-gradient(to bottom, #fafafa, #eaeaea);
+      -webkit-box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);
+         -moz-box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);
+              box-shadow: 0px 2px 2px -0px rgba(0,0,0,0.3);*/
+	border-radius: 30px;
+	margin: 0 auto;
+	width: 300px;
+	height: 100px;
+	
+	outline: none;
+}
+.mainButton:hover {
+	box-shadow: #1c75bc 0 0 1px 1px;
+}
+.mainButton:active {
+	background: #1c75bc;
+	color: #fff;
+	-webkit-transform: scale3d(0.9, 0.9, 1);
+}
+.bottomNav {
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* END MAIN */
+
+
+/* CONNECTION */
+
+.connectText {
+	font-size: 50px;
+	text-align: center;
+	margin: 150px 0px 100px 0px;
+}
+#later {
+	color: #7e7e7e;
+}
+.connected {
+	color: #47cf73;
+}
+.notConnected {
+	color: #ff3c41;
+}
+
+/* END CONNECTION */
+
+
+/* QR */
+
+.subtext .price {
+    color: #1c75bc;
+}
+
+.subtext .account {
+    color: #1c75bc;
+}
+
+.subtext .memo {
+    color: #1c75bc;
+    font-family: monospace;
+    font-style: normal;
+    font-size: 20px;
+    padding: 3px;
+    background-color: #ffffff;
+    line-height: 50px;
+    border-radius: 5px;
+}
+
+img {
+	display: block;
+	margin: 0 auto;
+}
+
+img.nfc {
+    display: block;
+    margin: 10px auto;
+    width: 25vh;
+    height: auto;
+}
+
+.subtext {
+    font-size: 17px;
+    color: #7e7e7e;
+    margin: 0% auto;
+	width: 92%;
+	text-align: center;
+    font-style: italic;
+}
+
+.maintext {
+	margin: 3% auto;
+	width: 92%;
+	text-align: center;
+}
+.info {
+	font-size: 50px;
+	color: #1c75bc;
+}
+.confirm {
+	font-size: 30px;
+	color: #7e7e7e;
+}
+
+/* END QR */
+

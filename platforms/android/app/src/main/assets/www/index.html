@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- This is a wide open CSP declaration. Lock this down for production. -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <title>SteemPay Vend</title>
+
+    <link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body>
+    <!-- loader div -->
+    <div id="loader" class="loader hideable hidden"><span id="status" class="status">processing payment...</span></div>
+    <!-- CONNECTION SCREEN -->
+    <div id="connection" class="hideable hidden">
+        <div class='mainBox'>
+            <img class='headerImage' src='img/steempayv.png'>
+            <div class='connectText'><span id='status' class='notConnected'>Not connected</span></div>
+            <div id='later' class='connectText'>Please come back later</div>
+        </div>
+    </div>
+    <!-- END CONNECTION -->
+
+    <!-- HOME SCREEN -->
+    <div id="home" class="hideable">
+        <div class='mainBox'>
+            <img class='headerImage' src='img/steempayv.png'>
+            <img class='mainImage' src='img/pepsi_logo.png'>
+            <br>
+            <br>
+            <br>
+            <div class='bottomNav'>
+                <button id="purchase" class='mainButton'>touch to begin</button>
+            </div>
+        </div>
+    </div>
+    <!-- END HOME -->
+
+    <!-- SALE PAGE -->
+    <div id="sale" class="hideable hidden">
+        <div class='mainBox'>
+            <img class='headerImage' src='img/steempayv.png'>
+
+            <div class="maintext info"><span class='price'>price</span></div>
+            <img class="nfc" src='img/nfc.png'>
+            <p class="maintext confirm">tap card to purchase</p>
+            <br>
+            <p class="subtext">or send the amount above to <span class='account'>account</span> with the following memo:<br><code class='memo'>memo</code></p>
+            <br>
+            <div class='bottomNav'>
+                <button id="cancel" class='mainButton cancelTX'>cancel</button>
+            </div>
+        </div>
+    </div>
+    <!-- END SALE -->
+
+    <!-- CONFIRM -->
+    <div id="confirm" class="hideable hidden">
+        <div class='mainBox'>
+            <img class='headerImage' src='img/steempayv.png'>
+            <br>
+            <p class="maintext confirm" id='confirmText'>Payment Confirmed!</p>
+            <br>
+            <br>
+            <img src='img/confirm_large.png'>
+            <br>
+            <br>
+            <p class="maintext confirm" id='thanks'>Select beverage and enjoy!</p>
+        </div>
+    </div>
+    <!-- END CONFIRM -->
+
+    <!-- PARTIAL -->
+    <div id="partial" class="hideable hidden">
+        <div class='mainBox'>
+            <img class='headerImage' src='img/steempayv.png'>
+            <br>
+            <br>
+            <div class="maintext info"><span id='partialPrice'>partial price</span> remaining</div>
+            <p class="maintext confirm">Partial Payment!</p>
+        </div>
+    </div>
+    <!-- END PARTIAL -->
+
+    <!-- LIBS -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/steem.min.js"></script>
+    <script src="js/lib/navigation.js"></script>
+    <script src="js/lib/aes.js"></script>
+    <script src="js/lib/utils.js"></script>
+    <script src="js/lib/steempay.js"></script>
+    <!-- SCRIPTS -->
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

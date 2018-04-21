@@ -137,3 +137,16 @@ img.nfc {
   height: 50vh;
   width: auto;
 }
+
+/* ANIMATIONS */
+.fade-enter-active {
+  transition: all .3s ease;
+}
+.fade-leave-active {
+  transition: opacity 0s;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+  transform: translateX(10px);
+}

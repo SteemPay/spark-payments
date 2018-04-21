@@ -17,91 +17,88 @@
 <body>
   <div id="app">
     <!-- loader div -->
-    <div id="loader" v-show="route === 'loader'"><span id="status" class="dark">loading...</span></div>
-    <!-- CONNECTION SCREEN -->
-    <div id="connection" v-show="route === 'connection'">
-      <div class='mainBox'>
-        <img class='logo' src='img/logo.png'>
-        <h1 class='red'>Not connected</h1>
-        <h1 class='dark'>Please check internet</h1>
-      </div>
-    </div>
-    <!-- END CONNECTION -->
-
-    <!-- HOME SCREEN -->
-    <div id="home" v-show="route === 'home'">
-      <div class='mainBox'>
-        <img class='logo' src='img/logo.png'>
-        <img class='mainImage' src='img/pepsi_logo.png'>
-        <br>
-        <div class='bottomNav'>
-          <button @click="purchase">touch to begin</button>
+    <transition name="fade">
+      <div id="loader" v-show="route === 'loader'"><span id="status" class="dark">loading...</span></div>
+    </transition>
+    <div id='content'>
+      <img class='logo' src='img/logo.png'>
+      <!-- CONNECTION -->
+      <transition name="fade">
+        <div id="connection" v-show="route === 'connection'">
+          <h1 class='red'>Not connected</h1>
+          <h1 class='dark'>Please check internet</h1>
         </div>
-      </div>
-    </div>
-    <!-- END HOME -->
-
-    <!-- SALE PAGE -->
-    <div id="sale" v-show="route === 'nfc'">
-      <div class='mainBox'>
-        <img class='logo' src='img/logo.png'>
-        <div class="primary maintext info"><span class='price'>{{ price }}</span></div>
-        <img class="nfc" src='img/nfc.png'>
-        <p class="dark maintext confirm">tap card to purchase</p>
-        <br>
-        <p class="dark subtext">or send the amount above to <span class='primary'>{{ account }}</span> with the following memo:<br>
-          <code class='primary memo'>{{ memo }}</code>
-        </p>
-        <br>
-        <div class='bottomNav'>
-          <button @click="cancel">cancel</button>
+      </transition>
+      <!-- HOME SCREEN -->
+      <transition name="fade">
+        <div id="home" v-show="route === 'home'">
+          <div class="bottomNav">
+            <br>
+            <br>
+            <br>
+            <br>
+            <button @click="purchase">new sale</button>
+            <br>
+            <br>
+            <button>recent sales</button>
+            <br>
+            <br>
+            <button>settings</button>
+          </div>
         </div>
-      </div>
+      </transition>
+      <!-- SALE PAGE -->
+      <transition name="fade">
+        <div id="sale" v-show="route === 'nfc'">
+          <div class="primary maintext info"><span class='price'>{{ price }}</span></div>
+          <img class="nfc" src='img/nfc.png'>
+          <p class="dark maintext confirm">tap card to purchase</p>
+          <br>
+          <p class="dark subtext">or send the amount above to <span class='primary'>{{ account }}</span> with the following memo:<br>
+            <code class='primary memo'>{{ memo }}</code>
+          </p>
+          <br>
+          <div class='bottomNav'>
+            <button @click="cancel">cancel</button>
+          </div>
+        </div>
+      </transition>
+      <!-- CONFIRM -->
+      <transition name="fade">
+        <div id="confirm" v-show="route === 'confirmed'">
+          <br>
+          <p class="dark maintext confirm">Payment Confirmed!</p>
+          <br>
+          <br>
+          <img src='img/confirm_large.png'>
+          <br>
+          <br>
+          <p class="dark maintext confirm">Thank you!</p>
+        </div>
+      </transition>
+      <!-- PARTIAL -->
+      <transition name="fade">
+        <div id="partial" v-show="route === 'partial'">
+          <br>
+          <br>
+          <div class="primary maintext info"><span id='partialPrice'>partial price</span> remaining</div>
+          <p class="dark maintext confirm">Partial Payment!</p>
+        </div>
+      </transition>
     </div>
-    <!-- END SALE -->
-
-    <!-- CONFIRM -->
-    <div id="confirm" v-show="route === 'confirmed'">
-      <div class='mainBox'>
-        <img class='logo' src='img/logo.png'>
-        <br>
-        <p class="dark maintext confirm">Payment Confirmed!</p>
-        <br>
-        <br>
-        <img src='img/confirm_large.png'>
-        <br>
-        <br>
-        <p class="dark maintext confirm">Thank you!</p>
-      </div>
-    </div>
-    <!-- END CONFIRM -->
-
-    <!-- PARTIAL -->
-    <div id="partial" v-show="route === 'partial'">
-      <div class='mainBox'>
-        <img class='logo' src='img/logo.png'>
-        <br>
-        <br>
-        <div class="primary maintext info"><span id='partialPrice'>partial price</span> remaining</div>
-        <p class="dark maintext confirm">Partial Payment!</p>
-      </div>
-    </div>
-  </div>
-  <!-- END PARTIAL -->
-
-  <!-- LIBS -->
-  <script type="text/javascript" src="cordova.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="js/lib/steem.min.js"></script>
-  <script src="js/lib/aes.js"></script>
-  <script src="js/lib/utils.js"></script>
-  <!-- <script src="js/lib/steempay.js"></script> -->
-  <script src="js/lib/steempay.api.js"></script>
-  <script src="js/lib/steempay.nfc.js"></script>
-  <!-- SCRIPTS -->
-  <script src="js/config.js"></script>
-  <script src="js/app.js"></script>
+    <!-- LIBS -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="js/lib/steem.min.js"></script>
+    <script src="js/lib/aes.js"></script>
+    <script src="js/lib/utils.js"></script>
+    <!-- <script src="js/lib/steempay.js"></script> -->
+    <script src="js/lib/steempay.api.js"></script>
+    <script src="js/lib/steempay.nfc.js"></script>
+    <!-- SCRIPTS -->
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
 
 </body>
 

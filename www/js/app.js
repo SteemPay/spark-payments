@@ -54,6 +54,10 @@ var app = new Vue({
       steempay.nfc.stopListening();
       steempay.transaction.watchStop();
       this.route = 'home';
+    },
+    soon: function() {
+      //temp function for coming soon sweetalert
+      swal("Sorry", "Feature coming soon :(", "error");
     }
   },
   created() {

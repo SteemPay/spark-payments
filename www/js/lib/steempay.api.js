@@ -30,7 +30,7 @@ var steempay = {
       return new Promise(resolve => {
         steempay.utils.ajax(`${steempay.config.api}/${user}`)
           .then(function(result) {
-            resolve(result.unknown_user !== user);
+            resolve(result !== false);
           })
           .catch(function(e) {
             console.log(`error: ${e}`);
@@ -75,6 +75,18 @@ var steempay = {
         }
       }
       return null;
+    },
+
+    getExchangeRate: function(token) {
+      return new Promise(resolve => {
+        steempay.utils.ajax(`${steempay.config.api}/rates/${token}`)
+          .then(function(result) {
+            resolve(result.price_usd);
+          })
+          .catch(function(e) {
+            console.log(`error: ${e}`);
+          });
+      });
     },
 
     ajax: function(url) {
@@ -147,7 +159,7 @@ var steempay = {
           var log = await steempay.account.getUserHistory(account);
 
           log.forEach(function(element) {
-            if (parseFloat(element.amount) >= parseFloat(amount) && element.memo === memo) {
+            if (parseFloat(element.details.amount) >= parseFloat(amount) && element.details.memo === memo) {
               steempay.transaction.watchStop();
               callback();
             }

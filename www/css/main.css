@@ -16,7 +16,8 @@
   --background: #ededed;
   --dark: #7e7e7e;
   --light: #fff;
-  --red: #F10032;
+  --red: #f10032;
+  --green: #47cf73;
 }
 
 * {
@@ -59,7 +60,7 @@ button:active {
   -webkit-transform: scale3d(0.9, 0.9, 1);
 }
 
-.bottomNav {
+.center {
   margin: 0 auto;
   text-align: center;
 }
@@ -149,4 +150,55 @@ img.nfc {
 .fade-enter, .fade-leave-active {
   opacity: 0;
   transform: translateX(10px);
+}
+
+/* NUMBER PAD */
+#form input:focus,
+#form select:focus,
+#form textarea:focus,
+#form button:focus {
+	outline: none;
+}
+.box {
+  background: var(--background);
+	margin: 1.5%;
+	width: 80%;
+	font-size: 3em;
+	text-align: center;
+	border: 1px solid #d5d5d5;
+}
+.number {
+	box-shadow: var(--secondary) 0 0 1px 1px;
+	font-size: 3em;
+}
+.clear {
+	font-size: 1.5em;
+	box-shadow: var(--red) 0 0 1px 1px;
+}
+.enter {
+	font-size: 1.5em;
+	box-shadow: var(--green) 0 0 1px 1px;
+}
+.button {
+	background: var(--background);
+	color: var(--dark);
+	border: none;
+	border-radius: 50%;
+	text-align: center;
+	width: 24vw;
+	height: 24vw;
+	margin: 1vw 1vw;
+	padding: 0;
+}
+.button:active {
+	background: var(--secondary);
+	color: #fff;
+}
+.clear:active {
+	background: var(--red);
+	color: #fff;
+}
+.enter:active {
+	background: var(--green);
+	color: #fff;
 }

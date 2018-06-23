@@ -157,7 +157,7 @@ var steempay = {
       if (steempay.transaction.isWatching) {
         window.setTimeout(async function() {
           var log = await steempay.account.getUserHistory(account);
-
+          console.log('watching');
           log.forEach(function(element) {
             if (parseFloat(element.details.amount) >= parseFloat(amount) && element.details.memo === memo) {
               steempay.transaction.watchStop();
@@ -172,6 +172,7 @@ var steempay = {
     },
 
     watchStop: function() {
+      console.log('stop watching');
       steempay.transaction.isWatching = false;
     }
 

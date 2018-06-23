@@ -49,7 +49,7 @@ steempay.nfc = {
     if (!steempay.nfc.isListening) {
       console.log("wasn't listening");
     } else {
-      steempay.isListening = false;
+      steempay.nfc.isListening = false;
       nfc.removeNdefListener(
         steempay.nfc.nfcHandler,
         function() { // success callback
@@ -74,8 +74,13 @@ steempay.nfc = {
       //verify that decrypted key converted to pub matches public key
       if (await verify(acc, key)) {
         app.$data.route = 'loader';; //todo: put this specific code somewhere else
-        steem.broadcast.transfer(key, acc, config.account, config.price, memo, function(err, result) {
+        steem.broadcast.transfer(key, acc, config.account, app.$data.price, memo, function(err, result) {
           console.log(err, result);
+          if (err) {
+            var message = err.message.split(": ")[1];
+            swal("Error!", message, "error");
+            app.cancel();
+          }
         });
         steempay.nfc.stopListening();
         //wrong pin or invalid account

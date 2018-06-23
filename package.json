@@ -1,14 +1,14 @@
 {
-    "name": "com.kodaxx.steempaypos",
-    "displayName": "SteemPayPOS",
+    "name": "com.spark.terminal",
+    "displayName": "Spark Payments",
     "version": "1.0.0",
-    "description": "A sample Apache Cordova application that responds to the deviceready event.",
+    "description": "An external terminal for processing STEEM transactions in brick and mortar stores",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "Apache Cordova Team",
-    "license": "Apache-2.0",
+    "author": "kodaxx",
+    "license": "MIT",
     "dependencies": {
         "cordova-android": "^7.0.0",
         "cordova-ios": "^4.5.4",

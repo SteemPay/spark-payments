@@ -8,7 +8,7 @@
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
-  <title>SteemPOS</title>
+  <title>Spark Payments</title>
 
   <link rel="stylesheet" href="css/main.css">
 
@@ -80,12 +80,12 @@
       <!-- PURCHASE PAGE -->
       <transition name="fade">
         <div id="purchase" v-show="route === 'nfc'">
-          <div class="primary maintext info"><span class='price'>{{ price }}</span></div>
+          <div class="secondary maintext info"><span class='price'>{{ price }}</span></div>
           <img class="nfc" src='img/nfc.png'>
-          <p class="dark maintext confirm">tap card to purchase</p>
+          <p class="secondary maintext confirm">tap card to purchase</p>
           <br>
-          <p class="dark subtext">or send the amount above to <span class='primary'>{{ account }}</span> with the following memo:<br>
-            <code class='primary memo'>{{ memo }}</code>
+          <p class="secondary subtext">or send the amount above to <span class='dark'>{{ account }}</span> with the following memo:<br>
+            <code class='dark memo'>{{ memo }}</code>
           </p>
           <br>
           <div class='center'>

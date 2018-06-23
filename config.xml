@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.kodaxx.steempayposui" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>SteemPOS</name>
+<widget id="com.spark.terminal" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Spark Payments</name>
     <description>
-        An external terminal for processing STEEM/SBD transactions in brick and mortar stores
+        An external terminal for processing STEEM transactions in brick and mortar stores
     </description>
     <author email="kodaxx@gmail.com" href="http://kodaxx.github.io">
-        Apache Cordova Team
+        kodaxx
     </author>
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />

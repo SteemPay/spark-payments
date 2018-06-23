@@ -11,10 +11,10 @@
 }
 
 :root {
-  --primary: #17499b; /*#1c75bc;*/
-  --secondary: #339df5; /*#339DF5;*/
+  --primary: #ffcc00; /*#17499b;*/
+  --secondary: #6B6570; /*#339df5;*/
   --background: #ededed;
-  --dark: #7e7e7e;
+  --dark: #282727;
   --light: #fff;
   --red: #f10032;
   --green: #47cf73;
@@ -47,10 +47,10 @@ body {
 /* BUTTONS */
 button {
   font-size: 40px;
-  color: var(--light);
-  border: none;
-  background: linear-gradient(to bottom, var(--secondary), var(--primary));
-  box-shadow: 0px 2px 2px -0px rgba(0, 0, 0, 0.3);
+  color: var(--secondary);
+  border: 1px solid var(--primary);
+  background: var(--background);
+  /* box-shadow: 0px 2px 2px -0px rgba(0, 0, 0, 0.3); */
   border-radius: 30px;
   width: 300px;
   height: 100px;
@@ -76,6 +76,10 @@ button:active {
 
 .primary {
   color: var(--primary);
+}
+
+.secondary {
+  color: var(--secondary);
 }
 
 /* TEXT */
@@ -161,14 +165,15 @@ img.nfc {
 }
 .box {
   background: var(--background);
-	margin: 1.5%;
+	margin: 2%;
 	width: 80%;
 	font-size: 3em;
 	text-align: center;
 	border: 1px solid #d5d5d5;
+  border-radius: 10px;
 }
 .number {
-	box-shadow: var(--secondary) 0 0 1px 1px;
+	box-shadow: var(--primary) 0 0 1px 1px;
 	font-size: 3em;
 }
 .clear {
@@ -181,7 +186,7 @@ img.nfc {
 }
 .button {
 	background: var(--background);
-	color: var(--dark);
+	color: var(--secondary);
 	border: none;
 	border-radius: 50%;
 	text-align: center;
@@ -191,7 +196,7 @@ img.nfc {
 	padding: 0;
 }
 .button:active {
-	background: var(--secondary);
+	background: var(--primary);
 	color: #fff;
 }
 .clear:active {

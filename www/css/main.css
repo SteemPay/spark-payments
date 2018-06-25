@@ -99,6 +99,11 @@ h1 {
   text-align: center;
 }
 
+.formtext {
+  margin-left: 10vw;
+  margin-bottom: 0vw;
+}
+
 .subtext {
   font-size: 17px;
   margin: 0% auto;
@@ -206,4 +211,15 @@ img.nfc {
 .enter:active {
 	background: var(--green);
 	color: #fff;
+}
+
+/* SETTINGS FORM */
+.formbox {
+  background: var(--background);
+	margin: 2% 2% 10% 2%;
+	width: 80%;
+	font-size: 1.5em;
+	border: 1px solid #d5d5d5;
+  border-radius: 10px;
+  padding: 10px;
 }

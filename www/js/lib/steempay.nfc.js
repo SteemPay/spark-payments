@@ -10,7 +10,7 @@ steempay.nfc = {
       },
       function(reason) {
         if (reason === "NFC_DISABLED") {
-          swal("Error!", "Please enable NFC on this device", "error");
+          swal("Error!", "Please enable NFC on this device.", "error");
           //show NFC settings dialog
           nfc.showSettings(
             function() {
@@ -74,7 +74,7 @@ steempay.nfc = {
       //verify that decrypted key converted to pub matches public key
       if (await verify(acc, key)) {
         app.$data.route = 'loader';; //todo: put this specific code somewhere else
-        steem.broadcast.transfer(key, acc, config.account, app.$data.price, memo, function(err, result) {
+        steem.broadcast.transfer(key, acc, app.$data.account, app.$data.price, memo, function(err, result) {
           console.log(err, result);
           if (err) {
             var message = err.message.split(": ")[1];

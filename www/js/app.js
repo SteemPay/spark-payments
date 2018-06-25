@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*global $, steempay, config, navigation, window, document*/
+/*global $, steempay, navigation, window, document*/
 
 //if device goes offline, show connection page
 window.addEventListener('offline', function() {
@@ -13,43 +13,51 @@ window.addEventListener('online', function() {
 document.addEventListener("deviceready", function() {
   steempay.nfc.checkNfc();
 });
+//add listener for android back button
+document.addEventListener("backbutton", onBackKeyDown, false);
+//back key event handler
+function onBackKeyDown(e) {
+  e.preventDefault();
+  app.route = 'home';
+}
 
 var app = new Vue({
   el: '#app',
   data: {
     route: 'home',
-    account: `@${config.account}`,
-    price: "0",
-    usd: "",
-    memo: 'memo'
+    account: localStorage.getItem('account'),
+    price: '',
+    usd: '',
+    memo: ''
   },
   methods: {
+    //clear usd price, steem price, and memo
     clear: function() {
       this.usd = '';
       this.price = '';
       this.memo = '';
     },
+    //adds pressed key to amount display
     add: function(num) {
       this.usd = `${this.usd}${num}`;
     },
+    //begins purchase
     purchase: async function() {
+      //if amount is empty, notify merchant and stop function
+      if (this.usd === '') {
+        swal("Error!", "Price cannot be blank. Please enter an amount.", "error");
+        return ;
+      }
       //generate random memo
-      let memo = steempay.utils.randomMemo();
-      this.memo = memo;
+      this.memo = steempay.utils.randomMemo();
       //get current price
-      console.log("usd: " + parseFloat(this.usd));
-      console.log("rate: " + parseFloat(await steempay.utils.getExchangeRate('steem')));
       this.price = `${(parseFloat(this.usd) / parseFloat(await steempay.utils.getExchangeRate('steem'))).toFixed(3)} STEEM`;
-      console.log("price: " + this.price);
       //start listening for NFC
       steempay.nfc.startListening(function() {
         steempay.transaction.isWatching = true;
         let memo = app.$data.memo;
         //start looking for transaction
-        console.log("account: " + config.account);
-        console.log("price: " + this.price);
-        console.log("memo: " + app.$data.memo);
-        steempay.transaction.watch(config.account, app.$data.price, memo, function() {
+        steempay.transaction.watch(app.$data.account, app.$data.price, memo, function() {
           //on success, show confirm page and clear form
           app.$data.route = 'confirmed';
           app.clear();
@@ -64,17 +72,25 @@ var app = new Vue({
       this.route = 'nfc';
     },
     cancel: function() {
-      //stop looking for transaction
+      //stop listening to nfc
       steempay.nfc.stopListening();
+      //stop looking for transaction
       steempay.transaction.watchStop();
+      //clear prices, memo, and return home
       this.clear();
       this.route = 'home';
     },
+    //saves input value to local storage and return home
+    save: function() {
+      localStorage.setItem('account', this.account);
+      this.route = 'home';
+    },
+    //temp function for coming soon sweetalert
     soon: function() {
-      //temp function for coming soon sweetalert
       swal("Sorry", "Feature coming soon :(", "error");
     }
   },
+  //when vue instance is created (app is started), do these things
   created() {
     //if device is offline, show connection page
     if (!navigator.onLine) {

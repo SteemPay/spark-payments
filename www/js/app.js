@@ -18,7 +18,8 @@ document.addEventListener("backbutton", onBackKeyDown, false);
 //back key event handler
 function onBackKeyDown(e) {
   e.preventDefault();
-  app.route = 'home';
+  app.cancel()
+  app.$data.route = 'home';
 }
 
 var app = new Vue({
@@ -82,7 +83,7 @@ var app = new Vue({
     },
     //saves input value to local storage and return home
     save: function() {
-      localStorage.setItem('account', this.account);
+      localStorage.setItem('account', this.account.toLowerCase());
       this.route = 'home';
     },
     //temp function for coming soon sweetalert

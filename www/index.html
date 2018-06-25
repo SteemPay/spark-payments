@@ -39,7 +39,7 @@
             <button @click="route = 'sale'">new sale</button>
             <br>
             <br>
-            <button @click="soon">recent sales</button>
+            <button @click="route = 'recent'">recent sales</button>
             <br>
             <br>
             <button @click="route = 'settings'">settings</button>
@@ -51,7 +51,7 @@
         <div id="sale" v-show="route === 'sale'">
           <div class="center">
             <form autocomplete='off'>
-              <input v-model='usd' type='text' class='box' value='' disabled>
+              <input v-model='usd' type='text' class='input pad' value='' disabled>
               <br>
               <input @click="add('1')" type='button' class='button number' value='1'>
               <input @click="add('2')" type='button' class='button number' value='2'>
@@ -114,13 +114,37 @@
           <p class="dark maintext confirm">Partial Payment!</p>
         </div>
       </transition>
+      <!-- RECENT SALES -->
+      <transition name="fade">
+        <div id="recent" v-show="route === 'recent'">
+          <br>
+          <br>
+          <div v-for="item in recent">
+            <div v-if="item.details.to === account && item.details.amount.includes('STEEM')" class="tx-wrap">
+              <p>
+                <span class="left">{{ `@${item.details.from}` }}</span>
+                <span class="right">{{ item.details.amount }}</span>
+              </p>
+              <br>
+              <p>
+                <span class="tx-detail left">{{ `id: ${item.details.memo}` }}</span>
+                <span class="tx-detail right">{{ `${item.timestamp.split('T')[0]} @ ${item.timestamp.split('T')[1]}` }}</span>
+              </p>
+              <br>
+            </div>
+          </div>
+          <div class='center'>
+            <button @click="cancel">back</button>
+          </div>
+        </div>
+      </transition>
       <!-- SETTINGS PAGE -->
       <transition name="fade">
         <div id="settings" v-show="route === 'settings'">
           <div class="center">
             <form autocomplete='off'>
               <p class="dark formtext" align="left">account</p>
-              <input v-model='account' type='text' class='formbox' value=''>
+              <input v-model='account' type='text' class='input settings' value=''>
               <button @click.prevent="save">save</button>
             </form>
           </div>

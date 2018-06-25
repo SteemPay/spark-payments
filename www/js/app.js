@@ -29,7 +29,8 @@ var app = new Vue({
     account: localStorage.getItem('account'),
     price: '',
     usd: '',
-    memo: ''
+    memo: '',
+    recent: ''
   },
   methods: {
     //clear usd price, steem price, and memo
@@ -47,7 +48,7 @@ var app = new Vue({
       //if amount is empty, notify merchant and stop function
       if (this.usd === '') {
         swal("Error!", "Price cannot be blank. Please enter an amount.", "error");
-        return ;
+        return;
       }
       //generate random memo
       this.memo = steempay.utils.randomMemo();
@@ -62,6 +63,8 @@ var app = new Vue({
           //on success, show confirm page and clear form
           app.$data.route = 'confirmed';
           app.clear();
+          //grab latest transactions
+          this.recent = await steempay.account.getUserHistory(this.account);
           //after 10 seconds, show home page
           setTimeout(function() {
             app.$data.route = 'home';
@@ -82,8 +85,10 @@ var app = new Vue({
       this.route = 'home';
     },
     //saves input value to local storage and return home
-    save: function() {
+    save: async function() {
+      this.account = this.account.toLowerCase();
       localStorage.setItem('account', this.account.toLowerCase());
+      this.recent = await steempay.account.getUserHistory(this.account);
       this.route = 'home';
     },
     //temp function for coming soon sweetalert
@@ -92,11 +97,15 @@ var app = new Vue({
     }
   },
   //when vue instance is created (app is started), do these things
-  created() {
+  async created() {
     //if device is offline, show connection page
     if (!navigator.onLine) {
       this.route = 'connection';
     }
+    if (!localStorage.getItem('account')) {
+      this.route = 'settings';
+    }
     document.getElementById("status").innerHTML = 'processing payment...';
+    this.recent = await steempay.account.getUserHistory(this.account);
   }
 });

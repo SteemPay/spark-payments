@@ -138,7 +138,7 @@ var steempay = {
 
     getUserHistory: function(user) {
       return new Promise(resolve => {
-        steempay.utils.ajax(`${steempay.config.api}/${user}/history`)
+        steempay.utils.ajax(`${steempay.config.api}/${user}/history/500`)
           .then(function(result) {
             resolve(result);
           })

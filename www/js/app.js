@@ -59,7 +59,7 @@ var app = new Vue({
         steempay.transaction.isWatching = true;
         let memo = app.$data.memo;
         //start looking for transaction
-        steempay.transaction.watch(app.$data.account, app.$data.price, memo, function() {
+        steempay.transaction.watch(app.$data.account, app.$data.price, memo, async function() {
           //on success, show confirm page and clear form
           app.$data.route = 'confirmed';
           app.clear();

@@ -64,7 +64,7 @@ var app = new Vue({
           app.$data.route = 'confirmed';
           app.clear();
           //grab latest transactions
-          app.$data.recent = await steempay.account.getUserHistory(this.account);
+          app.$data.recent = await steempay.account.getUserHistory(app.$data.account);
           //after 10 seconds, show home page
           setTimeout(function() {
             app.$data.route = 'home';

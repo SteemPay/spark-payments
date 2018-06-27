@@ -56,19 +56,24 @@ var app = new Vue({
       this.price = `${(parseFloat(this.usd) / parseFloat(await steempay.utils.getExchangeRate('steem'))).toFixed(3)} STEEM`;
       //start listening for NFC
       steempay.nfc.startListening(function() {
-        steempay.transaction.isWatching = true;
-        let memo = app.$data.memo;
-        //start looking for transaction
-        steempay.transaction.watch(app.$data.account, app.$data.price, memo, async function() {
-          //on success, show confirm page and clear form
-          app.$data.route = 'confirmed';
-          app.clear();
-          //grab latest transactions
-          app.$data.recent = await steempay.account.getUserHistory(app.$data.account);
-          //after 10 seconds, show home page
-          setTimeout(function() {
-            app.$data.route = 'home';
-          }, 10000);
+        //start streaming block (looking for transaction)
+        const release = steem.api.streamOperations(function(err, result) {
+          //check if block is a transaction to the user with an amount >= the price, and a matching memo
+          if (result[0] === 'transfer' &&
+            result[1].to === app.$data.account &&
+            parseFloat(result[1].amount) >= parseFloat(app.$data.price) &&
+            result[1].memo === app.$data.memo) {
+            //on success....
+            //stop streaming blocks
+            release();
+            //show confirm page and clear forms
+            app.$data.route = 'confirmed';
+            app.clear();
+            //after 10 seconds, show home page
+            setTimeout(function() {
+              app.$data.route = 'home';
+            }, 10000);
+          }
         });
         console.log("you can now scan a tag");
       });
@@ -83,6 +88,11 @@ var app = new Vue({
       //clear prices, memo, and return home
       this.clear();
       this.route = 'home';
+    },
+    //grabs recent transactions and shows page
+    recentSales: async function() {
+      this.recent = await steempay.account.getUserHistory(this.account);
+      this.route = 'recent';
     },
     //saves input value to local storage and return home
     save: async function() {
@@ -102,10 +112,10 @@ var app = new Vue({
     if (!navigator.onLine) {
       this.route = 'connection';
     }
+    //if there is no account in localstorage, show settings screen
     if (!localStorage.getItem('account')) {
       this.route = 'settings';
     }
     document.getElementById("status").innerHTML = 'processing payment...';
-    this.recent = await steempay.account.getUserHistory(this.account);
   }
 });
